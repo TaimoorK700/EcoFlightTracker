@@ -1,4 +1,4 @@
-# Eco Flight Tracker
+# EcoFlightTracker
 
 Eco Flight Tracker is a simple web-based calculator that estimates the carbon dioxide emissions produced by a flight. The project was initially written in Python and was later converted into a static HTML website with the help of AI so that it could be deployed and accessed online.
 
