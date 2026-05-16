@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Flight Tracker</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #007bff;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .result-item {
+            background-color: #e9f7ff;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .info {
+            margin-bottom: 10px;
+            font-style: italic;
+            color: #666;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Eco Flight Tracker</h1>
+        <h2>Calculate CO2 Emissions for Your Flight</h2>
+        <form id="calculator-form">
+            <label for="calculation-method">Choose Calculation Method:</label>
+            <select id="calculation-method" name="calculation-method" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="distance">Calculate by Range (km)</option>
+                <option value="city">Calculate by City</option>
+            </select>
+            <div id="distance-input" style="display: none;">
+    			<label for="range-km">Range in Kilometers:</label>
+    			<input type="number" id="range-km" name="range-km" min="1" style="width: calc(100% - 22px);">
+			</div>
+            <div id="city-input" style="display: none;">
+                <p class="info">Departure city is set to Dubai, UAE by default.</p>
+                <label for="city">Select a Destination City:</label>
+                <select id="city" name="city">
+                    <option value="" disabled selected>Select a city</option>
+                    <option value="116">Abu Dhabi, UAE</option>
+                    <option value="2655">Ankara, Turkey</option>
+                    <option value="4885">Bangkok, Thailand</option>
+                    <option value="5855">Beijing, China</option>
+                    <option value="12036">Brasilia, Brazil</option>
+                    <option value="11912">Canberra, Australia</option>
+                    <option value="4821">Copenhagen, Denmark</option>
+                    <option value="378">Doha, Qatar</option>
+                    <option value="1924">Islamabad, Pakistan</option>
+                    <option value="5550">Kuala Lumpur, Malaysia</option>
+                    <option value="5505">London, UK</option>
+                    <option value="14323">Mexico City, Mexico</option>
+                    <option value="2187">New Delhi, India</option>
+                    <option value="10757">Ottawa, Canada</option>
+                    <option value="5244">Paris, France</option>
+                    <option value="875">Riyadh, Saudi Arabia</option>
+                    <option value="6781">Seoul, South Korea</option>
+                    <option value="5847">Singapore</option>
+                    <option value="7925">Tokyo, Japan</option>
+                    <option value="11376">Washington, D.C., USA</option>
+                    <option value="14226">Wellington, New Zealand</option>
+                </select>
+            </div>
+            <label for="aircraft">Select an Aircraft:</label>
+            <select id="aircraft" name="aircraft" required>
+                <option value="" disabled selected>Select an aircraft</option>
+                <option value="4.23">Antonov An-148</option>
+                <option value="1.67">ATR 72-500</option>
+                <option value="2.80">Airbus A220 100</option>
+                <option value="2.79">Airbus A320 neo</option>
+                <option value="6.00">Airbus A330-200</option>
+                <option value="7.32">Airbus A340-300</option>
+                <option value="6.03">Airbus A350-900</option>
+                <option value="13.6">Airbus A380</option>
+                <option value="2.95">Bombardier CRJ700</option>
+                <option value="2.16">Bombardier Dash 8 Q400</option>
+                <option value="3.49">Boeing 737-300</option>
+                <option value="3.16">Boeing 737-600</option>
+                <option value="3.21">Boeing 737-700</option>
+                <option value="3.59">Boeing 737-800</option>
+                <option value="3.04">Boeing 737 MAX 8</option>
+                <option value="10.77">Boeing 747-400</option>
+                <option value="9.90">Boeing 747-8</option>
+                <option value="6.96">Boeing 777-200ER</option>
+                <option value="8.86">Boeing 777-300ER</option>
+                <option value="7.69">Boeing 777-9X</option>
+                <option value="5.63">Boeing 787-9</option>
+                <option value="1.22">Dornier 328</option>
+                <option value="0.92">Embraer Brasilia</option>
+                <option value="1.64">Embraer ERJ-135ER</option>
+                <option value="1.10">Saab 340</option>
+            </select>
+            <button type="button" onclick="calculateFootprint()">Calculate</button>
+        </form>
+        <div class="results" id="results" style="display: none;">
+            <div class="result-item" id="result-co2"></div>
+            <div class="result-item" id="result-trees"></div>
+            <div class="result-item" id="result-household"></div>
+            <div class="result-item" id="result-city"></div>
+        </div>
+    </div>
+    <footer>
+        <p>This site was made by Taimoor Khawaja. These calculations are only approximate and their accuracy is not guaranteed.</p>
+    </footer>
+
+    <script>
+        document.getElementById('calculation-method').addEventListener('change', function() {
+            if (this.value === 'distance') {
+                document.getElementById('distance-input').style.display = 'block';
+                document.getElementById('city-input').style.display = 'none';
+            } else if (this.value === 'city') {
+                document.getElementById('distance-input').style.display = 'none';
+                document.getElementById('city-input').style.display = 'block';
+            }
+        });
+
+        function convertYearsToYMD(yearsDecimal) {
+            const daysInYear = 365.25;
+            const daysInMonth = 30.44;
+            const years = Math.floor(yearsDecimal);
+            const remainingYearFraction = yearsDecimal - years;
+            const remainingDays = remainingYearFraction * daysInYear;
+            const months = Math.floor(remainingDays / daysInMonth);
+            const days = Math.floor(remainingDays % daysInMonth);
+            return { years, months, days };
+        }
+
+        function pluralize(value, singular, plural) {
+            return value === 1 ? singular : plural;
+        }
+        
+        function formatNumberWithCommas(inputValue) {
+            var formattedValue = inputValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return formattedValue;
+        }
+        function calculateFootprint() {
+            const method = document.getElementById('calculation-method').value;
+            const aircraftFactor = parseFloat(document.getElementById('aircraft').value);
+            let distance;
+
+            if (method === 'distance') {
+                distance = parseFloat(document.getElementById('range-km').value);
+            } else if (method === 'city') {
+                distance = parseFloat(document.getElementById('city').value);
+            }
+
+            if (!distance || !aircraftFactor) {
+                alert('Please provide all required inputs.');
+                return;
+            }
+
+
+            const output_totalCO2Emitted = formatNumberWithCommas(Math.round(aircraftFactor * distance * 3.16));
+            const calc_totalCO2Emitted = Math.round(aircraftFactor * distance * 3.16);
+            const trees = formatNumberWithCommas(Math.round(calc_totalCO2Emitted / 21));
+            const yearsDecimal = calc_totalCO2Emitted / 877;
+            const { years, months, days } = convertYearsToYMD(yearsDecimal);
+            const output_city_days = Math.round((calc_totalCO2Emitted / 0.5) / 50000);
+            const calc_city_days = (calc_totalCO2Emitted / 0.5) / 50000;
+            const city_hours = Math.round(calc_city_days * 24);
+
+            document.getElementById('result-co2').innerText = `The selected aircraft will emit ${output_totalCO2Emitted} kilograms of CO2.`;
+            document.getElementById('result-trees').innerText = `It would take ${trees} trees 1 year to absorb all the CO2 emitted into the atmosphere.`;
+            document.getElementById('result-household').innerText = `A typical household would take ${years} ${pluralize(years, 'year', 'years')}, ${months} ${pluralize(months, 'month', 'months')}, and ${days} ${pluralize(days, 'day', 'days')} to produce the same amount of carbon emissions, through electricity consumption, as this flight.`;
+            document.getElementById('result-city').innerText = `A small city would need to rely solely on renewable sources of electricity generation for approximately ${output_city_days} days (${city_hours} hours exactly) to offset the flight's emissions.`;
+
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
