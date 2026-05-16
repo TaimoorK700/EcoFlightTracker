@@ -6,7 +6,7 @@ Eco Flight Tracker is a simple web-based calculator that estimates the carbon di
 
 View the live website here:
 
-https://taimooork2007.github.io/eco-flight-tracker/
+[https://taimooork2007.github.io/eco-flight-tracker/](https://taimoork700.github.io/eco-flight-tracker/)
 
 ## About the Project
 
